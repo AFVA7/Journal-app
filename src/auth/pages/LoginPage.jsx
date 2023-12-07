@@ -7,16 +7,18 @@ import { useDispatch, useSelector } from "react-redux"
 import { startGooleSingIn, startLoginWithEmailPassword } from "../../store/auth"
 import { useMemo } from "react"
 
+//esto es como memorizarlo, para que no se vuelva a renderizar
+const formData = {
+  email: 'andres@gmail.com',
+  password: '12345'
+}
 export const LoginPage = () => {
 
   const { status, errorMessage } = useSelector(state => state.auth);
 
   const dispatch = useDispatch();
 
-  const { email, password, onInputChange } = useForm({
-    email: 'andres@gmail.com',
-    password: '12345'
-  });
+  const { email, password, onInputChange } = useForm(formData);
 
   const isAuthenticating = useMemo(
     () => status === 'checking', [status]
